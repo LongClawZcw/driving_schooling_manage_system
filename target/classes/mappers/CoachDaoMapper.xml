@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="CoachDao">
+    <!-- statement，内容：sql语句。id：唯一标识，随便写，在同一个命名空间下保持唯一
+       resultType：sql语句查询结果集的封装类型,tb_user即为数据库中的表
+     -->
+    <!--<select id="queryUserById" resultType="com.zpc.mybatis.pojo.User">-->
+    <!--select * from tb_user where id = #{id}-->
+    <!--</select>-->
+
+    <!--使用别名-->
+    <select id="queryUserById" resultType="com.zhangcw.driving_schooling_manage_system.entity.Coach">
+      select id,coach_id,coach_name ,phone ,car_number,age,picture_url
+      from tb_coach
+      where id = #{id};
+   </select>
+
+    <select id="queryUserAll" resultType="com.zhangcw.driving_schooling_manage_system.entity.Coach">
+        select * from tb_coach;
+    </select>
+
+    <!--插入数据-->
+    <insert id="insertUser" parameterType="com.zhangcw.driving_schooling_manage_system.entity.Coach">
+        INSERT INTO tb_coach (coach_id,coach_name,car_number,phone,age,picture_url)
+        VALUES (#{coach_id},#{coach_name},#{car_number},#{phone},#{age},#{picture_url}
+        );
+    </insert>
+
+    <update id="updateUser" parameterType="com.zhangcw.driving_schooling_manage_system.entity.Coach">
+        UPDATE tb_coach
+        <trim prefix="set" suffixOverrides=",">
+            <if test="coach_id!=null">coach_id = #{coach_id},</if>
+            <if test="coach_name!=null">coach_name = #{coach_name},</if>
+            <if test="car_number!=null">car_number = #{car_number},</if>
+            <if test="phone!=null">phone = #{phone},</if>
+            <if test="age!=null">age = #{age},</if>
+            <if test="picture_url!=null">picture_url = #{picture_url},</if>
+        </trim>
+        WHERE
+        (id = #{id});
+    </update>
+
+    <delete id="deleteUser">
+        delete from tb_coach where id=#{id}
+    </delete>
+</mapper>
