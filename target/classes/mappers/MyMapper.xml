@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="myMapper">
-    <select id="selectCoach" resultType="com.zhangcw.driving_schooling_manage_system.entity.Coach">
-      select * from tb_coach where id = #{id}
-   </select>
-</mapper>
