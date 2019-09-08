@@ -44,4 +44,10 @@
     <delete id="deleteUser">
         delete from tb_coach where id=#{id}
     </delete>
+
+    <select id="queryExistUsername" resultType="integer">
+      select id
+      from tb_coach
+      where coach_name = #{coach_name};
+   </select>
 </mapper>

@@ -77,4 +77,10 @@ public class CoachDaoTest {
         this.coachDao.deleteUser("4");
         this.sqlSession.commit();
     }
+    @Test
+    public void queryExistUsername() {
+        int res = this.coachDao.queryExistUsername("张三2");
+        System.out.print(res);
+        this.sqlSession.commit();
+    }
 }

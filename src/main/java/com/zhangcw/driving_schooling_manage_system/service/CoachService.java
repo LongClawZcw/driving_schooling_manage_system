@@ -1,5 +1,6 @@
 package com.zhangcw.driving_schooling_manage_system.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zhangcw.driving_schooling_manage_system.entity.Coach;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public interface CoachService {
     /**
      * 插入对象
      */
-    void intsertCoach(Coach coach);
+    JSONObject intsertCoach(Coach coach);
 
     /**
      *更新用户信息

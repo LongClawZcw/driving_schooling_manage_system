@@ -1,4 +1,5 @@
 package com.zhangcw.driving_schooling_manage_system.service.impl;
+import com.alibaba.fastjson.JSONObject;
 import com.zhangcw.driving_schooling_manage_system.dao.CoachDao;
 import com.zhangcw.driving_schooling_manage_system.dao.impl.CoachDaoImpl;
 import com.zhangcw.driving_schooling_manage_system.entity.Coach;
@@ -48,9 +49,9 @@ public class CoachServiceImpl implements CoachService  {
     }
 
     @Override
-    public void intsertCoach(Coach coach) {
+    public JSONObject intsertCoach(Coach coach) {
         CoachServiceImpl coachService = new CoachServiceImpl();
-        coachService.coachDao.insertUser(coach);
+        return coachService.coachDao.insertUser(coach);
     }
 
     @Override

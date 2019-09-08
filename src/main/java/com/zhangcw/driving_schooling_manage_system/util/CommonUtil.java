@@ -28,7 +28,6 @@ public class CommonUtil {
 		resultJson.put("info", info);
 		return resultJson;
 	}
-
 	/**
 	 * 返回错误信息JSON
 	 */

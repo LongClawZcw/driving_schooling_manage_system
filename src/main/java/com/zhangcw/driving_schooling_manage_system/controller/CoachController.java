@@ -37,8 +37,8 @@ public class CoachController {
         return coachService.getCoachById(id);
     }
     @RequestMapping(value = "/insertCoach",method = RequestMethod.POST)
-    public void insertCoach(@RequestBody Coach coach) {
-        coachService.intsertCoach(coach);
+    public JSONObject insertCoach(@RequestBody Coach coach) {
+        return coachService.intsertCoach(coach);
     }
     @RequestMapping(value = "/updateCoach",method = RequestMethod.POST)
     public void updateCoach(@RequestBody Coach coach) {
