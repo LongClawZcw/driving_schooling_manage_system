@@ -47,6 +47,7 @@ public class CoachDaoTest {
     @Test
     public void insertUser() {
         Coach coach = new Coach();
+        coach.setId(0);
         coach.setCoach_id("N8677");
         coach.setAge(45);
         coach.setCar_number("S2223454");

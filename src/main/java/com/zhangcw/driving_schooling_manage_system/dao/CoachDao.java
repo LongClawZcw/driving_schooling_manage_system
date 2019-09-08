@@ -25,16 +25,16 @@ public interface CoachDao {
     /**
      * 新增用户
      *
-     * @param user
+     * @param coach
      */
-    public void insertUser(Coach user);
+    public void insertUser(Coach coach);
 
     /**
      * 更新用户信息
      *
-     * @param user
+     * @param coach
      */
-    public void updateUser(Coach user);
+    public void updateUser(Coach coach);
 
     /**
      * 根据id删除用户信息

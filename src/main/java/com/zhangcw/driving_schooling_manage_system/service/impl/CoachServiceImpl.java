@@ -32,7 +32,7 @@ public class CoachServiceImpl implements CoachService  {
         // 构建SqlSessionFactory
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(is);
         // 获取sqlSession
-        sqlSession = sqlSessionFactory.openSession();
+        this.sqlSession = sqlSessionFactory.openSession(false);
         this.coachDao = new CoachDaoImpl(sqlSession);
     }
     @Override
@@ -40,4 +40,29 @@ public class CoachServiceImpl implements CoachService  {
         CoachServiceImpl coachService = new CoachServiceImpl();
         return coachService.coachDao.queryUserAll();
     }
+
+    @Override
+    public Coach getCoachById(String id) {
+        CoachServiceImpl coachService = new CoachServiceImpl();
+        return coachService.coachDao.queryUserById(id);
+    }
+
+    @Override
+    public void intsertCoach(Coach coach) {
+        CoachServiceImpl coachService = new CoachServiceImpl();
+        coachService.coachDao.insertUser(coach);
+    }
+
+    @Override
+    public void updateCoach(Coach coach) {
+        CoachServiceImpl coachService = new CoachServiceImpl();
+        coachService.coachDao.updateUser(coach);
+    }
+
+    @Override
+    public void deleteCoach(String id) {
+        CoachServiceImpl coachService = new CoachServiceImpl();
+        coachService.coachDao.deleteUser(id);
+    }
+
 }

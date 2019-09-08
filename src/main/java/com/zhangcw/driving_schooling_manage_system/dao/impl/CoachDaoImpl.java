@@ -25,17 +25,20 @@ public class CoachDaoImpl implements CoachDao {
     }
 
     @Override
-    public void insertUser(Coach user) {
-        this.sqlSession.insert("CoachDao.insertUser", user);
+    public void insertUser(Coach coach) {
+        this.sqlSession.insert("CoachDao.insertUser", coach);
+        this.sqlSession.commit();
     }
 
     @Override
     public void updateUser(Coach user) {
         this.sqlSession.update("CoachDao.updateUser", user);
+        this.sqlSession.commit();
     }
 
     @Override
     public void deleteUser(String id) {
         this.sqlSession.delete("CoachDao.deleteUser", id);
+        this.sqlSession.commit();
     }
 }
