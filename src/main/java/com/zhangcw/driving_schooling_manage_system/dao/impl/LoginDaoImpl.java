@@ -21,7 +21,6 @@ public class LoginDaoImpl implements LoginDao {
         this.sqlSession = sqlSession;
     }
 
-
     @Override
     public JSONObject getUser(String username, String password) {
         HashMap<String,Object> params = new HashMap<String,Object>();

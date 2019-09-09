@@ -40,5 +40,6 @@
         <mapper resource="mappers/MyMapper.xml" />
         <mapper resource="mappers/CoachDaoMapper.xml"/>
         <mapper resource="mappers/LoginDaoMapper.xml"/>
+        <mapper resource="mappers/PermissionDaoMapper.xml"/>
     </mappers>
 </configuration>

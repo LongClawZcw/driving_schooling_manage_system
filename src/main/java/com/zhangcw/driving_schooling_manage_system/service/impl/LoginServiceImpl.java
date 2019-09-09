@@ -4,7 +4,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.zhangcw.driving_schooling_manage_system.dao.LoginDao;
 import com.zhangcw.driving_schooling_manage_system.dao.impl.LoginDaoImpl;
 import com.zhangcw.driving_schooling_manage_system.service.LoginService;
+import com.zhangcw.driving_schooling_manage_system.service.PermissionService;
 import com.zhangcw.driving_schooling_manage_system.util.CommonUtil;
+import com.zhangcw.driving_schooling_manage_system.util.constants.Constants;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -12,6 +14,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,8 @@ public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginDao loginDao;
     public SqlSession sqlSession;
+    @Autowired
+    private PermissionService permissionService;
 
     public LoginServiceImpl(){
         String resource = "mybatis-config.xml";
@@ -75,7 +80,15 @@ public class LoginServiceImpl implements LoginService {
      */
     @Override
     public JSONObject getInfo() {
-        return null;
+        //从session获取用户信息
+        Session session = SecurityUtils.getSubject().getSession();
+        JSONObject userInfo = (JSONObject) session.getAttribute(Constants.SESSION_USER_INFO);
+        String username = userInfo.getString("username");
+        JSONObject info = new JSONObject();
+        JSONObject userPermission = permissionService.getUserPermission(username);
+        session.setAttribute(Constants.SESSION_USER_PERMISSION, userPermission);
+        info.put("userPermission", userPermission);
+        return CommonUtil.successJson(info);
     }
     /**
      * 退出登录
