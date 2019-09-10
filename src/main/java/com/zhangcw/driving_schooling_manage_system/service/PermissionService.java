@@ -1,5 +1,6 @@
 package com.zhangcw.driving_schooling_manage_system.service;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 /**
@@ -12,5 +13,5 @@ public interface PermissionService {
     /**
      * 查询用户的角色 菜单列表 权限列表
      */
-    JSONObject getUserPermission(String username);
+    JSONArray getUserPermission(String username);
 }

@@ -1,7 +1,9 @@
 package com.zhangcw.driving_schooling_manage_system.dao;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -14,7 +16,7 @@ public interface PermissionDao {
     /**
      * 查询用户的角色 菜单 权限
      */
-    JSONObject getUserPermission(String username);
+    List<JSONObject> getUserPermission(String username);
 
     /**
      * 查询所有的菜单

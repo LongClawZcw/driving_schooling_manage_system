@@ -1,10 +1,12 @@
 package com.zhangcw.driving_schooling_manage_system.dao.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zhangcw.driving_schooling_manage_system.dao.PermissionDao;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -21,8 +23,8 @@ public class PermissionDaoImpl implements PermissionDao {
     }
 
     @Override
-    public JSONObject getUserPermission(String username) {
-        return  this.sqlSession.selectOne("PermissionDao.getgetUserPermission",username);
+    public List<JSONObject> getUserPermission(String username) {
+        return  this.sqlSession.selectList("PermissionDao.getUserPermission",username);
     }
 
     @Override

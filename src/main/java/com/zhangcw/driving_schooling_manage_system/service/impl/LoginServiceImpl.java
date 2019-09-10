@@ -1,10 +1,12 @@
 package com.zhangcw.driving_schooling_manage_system.service.impl;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.zhangcw.driving_schooling_manage_system.dao.LoginDao;
+import com.zhangcw.driving_schooling_manage_system.dao.PermissionDao;
 import com.zhangcw.driving_schooling_manage_system.dao.impl.LoginDaoImpl;
+import com.zhangcw.driving_schooling_manage_system.dao.impl.PermissionDaoImpl;
 import com.zhangcw.driving_schooling_manage_system.service.LoginService;
-import com.zhangcw.driving_schooling_manage_system.service.PermissionService;
 import com.zhangcw.driving_schooling_manage_system.util.CommonUtil;
 import com.zhangcw.driving_schooling_manage_system.util.constants.Constants;
 import org.apache.ibatis.io.Resources;
@@ -21,6 +23,7 @@ import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @Author:zhangchangwei
@@ -32,9 +35,10 @@ import java.io.InputStream;
 public class LoginServiceImpl implements LoginService {
     @Autowired
     private LoginDao loginDao;
-    public SqlSession sqlSession;
     @Autowired
-    private PermissionService permissionService;
+    private PermissionDao permissionDao;
+    public SqlSession sqlSession;
+
 
     public LoginServiceImpl(){
         String resource = "mybatis-config.xml";
@@ -49,6 +53,7 @@ public class LoginServiceImpl implements LoginService {
         // 获取sqlSession
         this.sqlSession = sqlSessionFactory.openSession(false);
         this.loginDao = new LoginDaoImpl(sqlSession);
+        this.permissionDao = new PermissionDaoImpl(sqlSession);
     }
     @Override
     public JSONObject authLogin(JSONObject jsonObject) {
@@ -85,7 +90,8 @@ public class LoginServiceImpl implements LoginService {
         JSONObject userInfo = (JSONObject) session.getAttribute(Constants.SESSION_USER_INFO);
         String username = userInfo.getString("username");
         JSONObject info = new JSONObject();
-        JSONObject userPermission = permissionService.getUserPermission(username);
+        LoginServiceImpl loginServiceImpl = new LoginServiceImpl();
+        List<JSONObject> userPermission = loginServiceImpl.permissionDao.getUserPermission(username);
         session.setAttribute(Constants.SESSION_USER_PERMISSION, userPermission);
         info.put("userPermission", userPermission);
         return CommonUtil.successJson(info);
